@@ -7,14 +7,17 @@ on:
     - cron: "0 0 * * *"
     # https://docs.github.com/zh/actions/using-workflows/events-that-trigger-workflows#schedule
   workflow_dispatch:
-  
+permissions:
+  contents: write
+        
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
     steps:
       # 基础信息（顺带了几个小插件）
       - name: base
-        uses: lowlighter/metrics@latest
+      - uses: actions/checkout@v2
+      - uses: lowlighter/metrics@latest
         with:
           filename: github-metrics/base.svg
           # Your GitHub token
@@ -200,3 +203,12 @@ jobs:
           plugin_stackoverflow_user: 1
           plugin_stackoverflow_sections: answers-top
           plugin_stackoverflow_limit: 2
+          permissions:
+
+      - name: Commit & Push
+        run: |
+          git config user.name ${{ github.repository_owner }}
+          git config user.email ${{ secrets.EMAIL }}
+          git add -A .
+          git commit -m "generated"
+          git push
