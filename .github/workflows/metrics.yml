@@ -10,19 +10,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: lowlighter/metrics@latest
+      - name: Using graph charts
+        uses: lowlighter/metrics@latest
         with:
+          filename: metrics.plugin.stargazers.graph.svg
           token: ${{ secrets.TOKEN }}
-          filename: github-metrics/base.svg
-          # Options
-          user: ascotbe
-          template: classic
-          base: ''
-          config_timezone: Asia/Shanghai
-          plugin_steam: yes
-          plugin_steam_achievements_limit: 2
-          plugin_steam_games_limit: 1
-          plugin_steam_playtime_threshold: 2
-          plugin_steam_recent_games_limit: 1
-          plugin_steam_sections: player, most-played, recently-played
-          plugin_steam_user: 76561198000697560
+          base: ""
+          plugin_stargazers: yes
+          plugin_stargazers_charts_type: graph
