@@ -21,7 +21,7 @@ jobs:
           # Your GitHub token
           token: ${{ secrets.TOKEN }}
           # Options
-          user: leoFitz1024
+          user: ${{ github.repository_owner }}
           template: classic
           config_timezone: Asia/Shanghai
           base: "header, activity, community, repositories"
